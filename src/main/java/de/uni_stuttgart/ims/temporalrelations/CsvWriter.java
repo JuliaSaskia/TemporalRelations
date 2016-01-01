@@ -36,7 +36,12 @@ public class CsvWriter {
                     outputStream.print(escape(features.word) + "," +escape(features.lemma) + "," + escape(features.POS)+","+features.unicodeCharClass+","+features.tempType);
                     printPrevContext(outputStream, features);
                     printNextContext(outputStream, features);
-                    outputStream.println(","+token.getClassification());
+                    if (token.getClassification() == ClassedToken.TimeMlClass.TIME){
+                        outputStream.println(","+"yes");
+                    }else{
+                        outputStream.println(","+"no");
+                    }
+
                 }
             }
         } catch (IOException e) {

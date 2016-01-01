@@ -73,7 +73,7 @@ public class StringMapper {
                 current.prev[j-i+3]=featuresSentence.get(j).getFeatures();
             }
             //up to 3 tokens after the current token
-            for (int j = Math.max(i+1,i+4); j < i+4; j++){
+            for (int j = i+1; j < Math.min(i+4,featuresSentence.size()); j++){
                 //extracting features in the context
                 current.next[j-i-1]=featuresSentence.get(j).getFeatures();
             }
