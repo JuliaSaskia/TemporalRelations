@@ -5,7 +5,12 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -85,7 +90,7 @@ public class BasicAnnotations {
     public List<Annotation> annotate(List<String> dirnames) {
         List<Annotation> annotatedDocuments = new ArrayList<>();
         for (String dirname : dirnames) {
-            List<String> inputs = readDir(dirname);
+            List<String> inputs = readDir(dirname); //change here for testing readDirXML
             for (String input : inputs) {
                 Annotation document = new Annotation(input);
                 pipeline.annotate(document);

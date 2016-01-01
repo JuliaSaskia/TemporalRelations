@@ -26,16 +26,16 @@ public class TemporalRelations {
 
 
 
-        ArrayList<ArrayList<BasicFeatures>> annotatedSentences = new ArrayList<>();
+        ArrayList<ArrayList<ClassedToken>> annotatedSentences = new ArrayList<>();
         for (Annotation annotation : annotations) {
             List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
 
             for (CoreMap sentence : sentences) {
                 List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
-                ArrayList<BasicFeatures> annotatedSentence = StringMapper.extractFeaturesSentence(tokens);
+                ArrayList<ClassedToken> annotatedSentence = StringMapper.extractFeaturesSentence(tokens);
                 annotatedSentences.add(annotatedSentence);
-                for(BasicFeatures features : annotatedSentence){
-                    System.out.println(features);
+                for(ClassedToken token : annotatedSentence){
+                    System.out.println(token);
                 }
 
               /*  for (CoreLabel token : tokens) {
