@@ -75,6 +75,8 @@ public class CsvWriter {
     }
 
     private static String escape(String token){
+        token = token.replace("\"","\\\"");
+        token = token.replace("'","\u2019");
         return '"'+token+'"';
     }
 

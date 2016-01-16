@@ -24,7 +24,6 @@ public class ClassedToken {
         this.token = tok;
     }
 
-
     public BasicFeatures getFeatures() {
         return features;
     }

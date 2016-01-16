@@ -10,8 +10,7 @@ import java.util.Map;
 
 /**
  * extracts features for one sentence and saves features
- * in an ArrayList where the features of every token
- * are represented in a hashmap
+ * in an ArrayList
  * Created by julia on 22.11.15.
  */
 public class StringMapper {

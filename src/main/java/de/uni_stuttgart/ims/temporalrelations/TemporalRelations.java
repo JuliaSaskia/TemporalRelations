@@ -20,7 +20,7 @@ public class TemporalRelations {
 
         BasicAnnotations test = new BasicAnnotations();
         List<String> dirlist = new ArrayList<>();
-        dirlist.add("subSet");
+        dirlist.add("TimeBank");
         //dirlist.add("TimeBank");
         List<Annotation> annotations = test.annotate(dirlist);
 
@@ -53,7 +53,7 @@ public class TemporalRelations {
             */
             }
         }
-        CsvWriter.writeToFile(annotatedSentences, "Data/testFile.csv");
+        CsvWriter.writeToFile(annotatedSentences, "Data/timebank.csv");
     }
 
 }
