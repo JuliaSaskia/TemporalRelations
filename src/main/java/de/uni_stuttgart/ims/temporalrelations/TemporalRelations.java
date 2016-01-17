@@ -5,6 +5,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.util.CoreMap;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class TemporalRelations {
 
         BasicAnnotations test = new BasicAnnotations();
         List<String> dirlist = new ArrayList<>();
-        dirlist.add("TimeBank");
+        dirlist.add("AQUAINT");
         //dirlist.add("TimeBank");
         List<Annotation> annotations = test.annotate(dirlist);
 
@@ -53,7 +54,16 @@ public class TemporalRelations {
             */
             }
         }
-        CsvWriter.writeToFile(annotatedSentences, "Data/timebank.csv");
+        CsvWriter.writeToFile(annotatedSentences, "Data/aquaint.csv");
+
+        WekaLearn testWeka = new WekaLearn();
+        try {
+            testWeka.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        testWeka.train();
+        testWeka.cTest();
     }
 
 }

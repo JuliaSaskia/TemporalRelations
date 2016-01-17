@@ -89,6 +89,13 @@
       <artifactId>icu4j</artifactId>
       <version>56.1</version>
     </dependency>
+    
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-stable</artifactId>
+      <version>3.6.13</version>
+    </dependency>
+
 
 
   </dependencies>
