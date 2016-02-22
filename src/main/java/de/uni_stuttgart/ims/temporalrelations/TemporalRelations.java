@@ -5,6 +5,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.util.CoreMap;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class TemporalRelations {
 
         BasicAnnotations test = new BasicAnnotations();
         List<String> dirlist = new ArrayList<>();
-        dirlist.add("AQUAINT");
+        dirlist.add("TimeBank");
         //dirlist.add("TimeBank");
         List<Annotation> annotations = test.annotate(dirlist);
 
@@ -35,9 +36,6 @@ public class TemporalRelations {
                 List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
                 ArrayList<ClassedToken> annotatedSentence = StringMapper.extractFeaturesSentence(tokens);
                 annotatedSentences.add(annotatedSentence);
-                for(ClassedToken token : annotatedSentence){
-                    System.out.println(token);
-                }
 
               /*  for (CoreLabel token : tokens) {
                     String word = token.get(CoreAnnotations.TextAnnotation.class);
@@ -54,16 +52,44 @@ public class TemporalRelations {
             */
             }
         }
-        CsvWriter.writeToFile(annotatedSentences, "Data/aquaint.csv");
+//        try {
+//            Writer csvWriter = new CsvWriter("Data/aquaint.csv");
+//            csvWriter.write(annotatedSentences);
+//            csvWriter.close();
+//        } catch (FileNotFoundException e) {
+//            System.err.println("File not found: "+e.getMessage());
+//        }
 
-        WekaLearn testWeka = new WekaLearn();
+
+//        try {
+//            Writer ssvWriter = new SsvWriterBIO("Data/timebank.ssv");
+//            ssvWriter.write(annotatedSentences);
+//            ssvWriter.close();
+//        } catch (FileNotFoundException e) {
+//            System.err.println("File not found: "+e.getMessage());
+//        }
+
+
         try {
-            testWeka.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Writer ssvWriter = new SsvWriterBIO("Data/timebank_test.ssv");
+            ssvWriter.writeTest(annotatedSentences);
+            ssvWriter.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: "+e.getMessage());
         }
-        testWeka.train();
-        testWeka.cTest();
+
+s
+
+
+//
+//        WekaLearn testWeka = new WekaLearn();
+//        try {
+//            testWeka.load();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        testWeka.train();
+//        testWeka.cTest();
     }
 
 }

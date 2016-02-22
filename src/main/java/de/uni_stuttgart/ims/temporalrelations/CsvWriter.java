@@ -1,5 +1,6 @@
 package de.uni_stuttgart.ims.temporalrelations;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +10,12 @@ import java.util.List;
 /**
  * Created by julia on 21.12.15.
  */
-public class CsvWriter {
+public class CsvWriter extends Writer{
+    private PrintWriter outputStream;
+
+    public CsvWriter(String fileName) throws FileNotFoundException {
+        outputStream = new PrintWriter(new FileOutputStream(fileName));
+    }
 
 
     public static String header(){
@@ -24,37 +30,33 @@ public class CsvWriter {
     }
 
 
-
-    public static void writeToFile(ArrayList<ArrayList<ClassedToken>> annotatedSentence, String fileName) {
-        PrintWriter outputStream = null;
-        try {
-            outputStream = new PrintWriter(new FileOutputStream(fileName));
-            outputStream.println(header());
-            for (ArrayList<ClassedToken> tokens : annotatedSentence) {
-                for (ClassedToken token : tokens) {
-                    BasicFeatures features = token.getFeatures();
-                    outputStream.print(escape(features.word) + "," +escape(features.lemma) + "," + escape(features.POS)+","+features.unicodeCharClass+","+features.tempType);
-                    printPrevContext(outputStream, features);
-                    printNextContext(outputStream, features);
-                    if (token.getClassification() == ClassedToken.TimeMlClass.TIME){
-                        outputStream.println(","+"yes");
-                    }else{
-                        outputStream.println(","+"no");
-                    }
-
+    @Override
+    public void write(ArrayList<ArrayList<ClassedToken>> annotatedSentence) {
+        outputStream.println(header());
+        for (ArrayList<ClassedToken> tokens : annotatedSentence) {
+            for (ClassedToken token : tokens) {
+                BasicFeatures features = token.getFeatures();
+                outputStream.print(escape(features.word) + "," +escape(features.lemma) + "," + escape(features.POS)+","+features.unicodeCharClass+","+features.tempType);
+                printPrevContext(features);
+                printNextContext(features);
+                if (token.getClassification() == ClassedToken.TimeMlClass.TIME){
+                    outputStream.println(","+"yes");
+                }else{
+                    outputStream.println(","+"no");
                 }
+
             }
-        } catch (IOException e) {
-            System.out.println("Could not open or create file" + fileName);
-        } finally {
-            outputStream.close();
         }
-
-
-
     }
 
-    private static void printNextContext(PrintWriter outputStream, BasicFeatures features) {
+    @Override
+    public void close(){
+        outputStream.close();
+    }
+
+
+
+    private void printNextContext(BasicFeatures features) {
         for(BasicFeatures nextFeatures : features.next){
             if(nextFeatures != null) {
                 outputStream.print("," + escape(nextFeatures.word) + "," + escape(nextFeatures.lemma) + "," + escape(nextFeatures.POS) + "," + nextFeatures.unicodeCharClass + "," + nextFeatures.tempType);
@@ -64,7 +66,7 @@ public class CsvWriter {
         }
     }
 
-    private static void printPrevContext(PrintWriter outputStream, BasicFeatures features) {
+    private void printPrevContext(BasicFeatures features) {
         for(BasicFeatures prevFeatures : features.prev){
             if(prevFeatures != null) {
                 outputStream.print("," + escape(prevFeatures.word) + "," + escape(prevFeatures.lemma) + "," + escape(prevFeatures.POS) + "," + prevFeatures.unicodeCharClass + "," + prevFeatures.tempType);
