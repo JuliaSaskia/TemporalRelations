@@ -6,8 +6,12 @@ import edu.stanford.nlp.util.Pair;
 import edu.stanford.nlp.util.TypesafeMap;
 
 /**
- * This class is used as a Key in a CoreMap, to associate timex information. Apart fron that
+ * This class is used as a Key in a CoreMap, to associate timex information. Apart from that
  * it does nothing.
+ *
+ * @author julia bettinger
+ * @author jens beck
+ *
  */
 public class TimexTypeAnnotation implements CoreAnnotation<String> {
 

@@ -1,7 +1,10 @@
 package de.uni_stuttgart.ims.temporalrelations;
 
 /**
- * Created by julia on 21.12.15.
+ * stores all features for one token
+ *
+ * @author julia bettinger
+ * @author jens beck
  */
 public class BasicFeatures {
 
@@ -28,7 +31,5 @@ public class BasicFeatures {
         this.prev = new BasicFeatures[3];
         this.next = new BasicFeatures[3];
     }
-
-
 
 }

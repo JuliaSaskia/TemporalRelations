@@ -13,7 +13,9 @@ import java.util.stream.IntStream;
 /**
  *extracts first 5 features of our given paper
  *
- * Created by julia on 22.11.15.
+ * @author julia bettinger
+ * @author jens beck
+ *
  */
 public class BasicFeaturesExtractor {
 
@@ -21,7 +23,7 @@ public class BasicFeaturesExtractor {
     /**
      * getText returns text of a token
      * @param token
-     * @return
+     * @return      String of a token
      */
     public static String getText(CoreLabel token) {
         String word = token.word();
@@ -31,7 +33,7 @@ public class BasicFeaturesExtractor {
     /**
      * getLemma returns lemma of a token
      * @param token
-     * @return
+     * @return      lemma of a token as a String
      */
     public static String getLemma(CoreLabel token) {
         String lemma = token.lemma();
@@ -41,7 +43,7 @@ public class BasicFeaturesExtractor {
     /**
      * getPOS returns the part-of-speech-tag of a token
      * @param token
-     * @return
+     * @return          POS-tag as a String
      */
     public static String getPOS(CoreLabel token) {
         String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
@@ -51,7 +53,7 @@ public class BasicFeaturesExtractor {
     /**
      * maps unicode character classes to abbreviations
      * @param type
-     * @return
+     * @return          abbreviation of the unicode char class
      */
     private static String toUnicodeClassAbbrv(int type) {
         switch (type) {
@@ -122,7 +124,7 @@ public class BasicFeaturesExtractor {
      * returns the unicode char classes concatenated of a token
      * and with duplicates merged
      * @param token
-     * @return
+     * @return          unicode char class abbreviation as a String
      */
     public static String getUnicodeCharClasses(CoreLabel token) {
         String word = token.originalText();
@@ -155,7 +157,7 @@ public class BasicFeaturesExtractor {
      * returns the temporal type of each token if existing
      * else noTempType
      * @param token
-     * @return
+     * @return          temporal type of a token as a String
      */
     public static String getTempType(CoreLabel token) {
         String tempType;

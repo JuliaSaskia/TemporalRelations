@@ -4,14 +4,15 @@ import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * extracts features for one sentence and saves features
  * in an ArrayList
- * Created by julia on 22.11.15.
+ *
+ * @author julia bettinger
+ * @author jens beck
+ *
  */
 public class StringMapper {
 
@@ -22,7 +23,7 @@ public class StringMapper {
     /**
      * returns ArrayList of features of each token
      * @param sentence
-     * @return
+     * @return      ArrayList of features for each token in a sentence
      */
     public static ArrayList<ClassedToken> extractFeaturesSentence(List<CoreLabel> sentence){
         ArrayList<ClassedToken> featuresSentence = new ArrayList<>();
@@ -31,7 +32,7 @@ public class StringMapper {
             List<String> xmlTags = token.get(CoreAnnotations.XmlContextAnnotation.class);
             String xmlTagsLast = xmlTags.get(xmlTags.size()-1);
             ClassedToken.TimeMlClass classification = ClassedToken.TimeMlClass.UNKNOWN;
-
+            String timextype= token.get(TimexTypeAnnotation.class);
             if (xmlTagsLast.equals("TIMEX3")){
                 classification = ClassedToken.TimeMlClass.TIME;
             } else if (xmlTagsLast.equals("EVENT")) {

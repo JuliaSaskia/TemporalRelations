@@ -28,7 +28,9 @@ import java.util.Properties;
  * class basic annotations provides methods for doing basic annotations
  * on sentence data sets
  *
- * Created by julia on 22.11.15.
+ * @author julia bettinger
+ * @author jens beck
+ *
  */
 public class BasicAnnotations {
 
@@ -41,14 +43,15 @@ public class BasicAnnotations {
     public BasicAnnotations(){
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize, cleanxml, ssplit, pos, lemma");
+        props.setProperty("clean.tokenAnnotations","de.uni_stuttgart.ims.temporalrelations.TimexTypeAnnotation=timex3[type]");
         this.pipeline = new StanfordCoreNLP(props);
     }
 
 
     /**
      * readDir reads in all files which are in dirname
-     * @param dirname
-     * @return
+     * @param dirname   name of the directory which is read
+     * @return          String list of the content of each file in the directory
      */
     private List<String> readDir(String dirname){
         File directory = new File(dirname);
@@ -84,13 +87,13 @@ public class BasicAnnotations {
 
     /**
      * annotate creates basic annotations on the given documents
-     * @param dirnames
-     * @return
+     * @param dirnames  list of the directory names to be read in
+     * @return          list of the text with all chosen annotations
      */
     public List<Annotation> annotate(List<String> dirnames) {
         List<Annotation> annotatedDocuments = new ArrayList<>();
         for (String dirname : dirnames) {
-            List<String> inputs = readDir(dirname); //change here for testing readDirXML
+            List<String> inputs = readDir(dirname);
             for (String input : inputs) {
                 Annotation document = new Annotation(input);
                 pipeline.annotate(document);

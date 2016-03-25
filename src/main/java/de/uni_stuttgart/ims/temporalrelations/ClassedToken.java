@@ -3,9 +3,17 @@ package de.uni_stuttgart.ims.temporalrelations;
 import edu.stanford.nlp.ling.CoreLabel;
 
 /**
- * Created by julia on 01.01.16.
+ * represents a token with all additional information
+ * including setter- and getter-methods
+ *
+ * @author julia bettinger
+ * @author jens beck
  */
 public class ClassedToken {
+    /**
+     * representation for classifying the type of
+     * a temporal expression
+     */
     public enum TimeMlClass{
         UNKNOWN,
         TIME,
